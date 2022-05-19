@@ -1,11 +1,11 @@
 import "./App.css";
-import logo from "./logo.png";
-
+import { Box } from "@chakra-ui/react"
+import Header from "./components/Header"
 function App() {
   return (
-    <div className="App">
-        Vedio Library
-    </div>
+    < >
+    <Header/>
+    </>
   );
 }
 
