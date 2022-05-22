@@ -6,3 +6,8 @@
 #side-nav{
  height:calc(100vh - 64px)
 }
+.categoryImage{
+  height: 10rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}

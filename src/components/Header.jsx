@@ -5,21 +5,20 @@ import { useState } from 'react'
 export default function Header() {
 
 const [isLargerThan620] = useMediaQuery('(min-width: 620px)')
-console.log(isLargerThan620)
 const [menuDisp, setMenuDisp] = useState("none")
   if(isLargerThan620)
   {
     return(
       <>
   <Flex justifyContent={'space-between'} alignItems={"center"} width={'100%'} height={'4rem'} bgColor={'teal.300'}
-    color={'teal.900'} position={"absolute"} top={"0rem"} zIndex={1}>
+    color={'teal.900'} position={"fixed"} top={"0rem"} zIndex={1}>
     <Box ml={'3rem'} fontSize={'1.8rem'} fontWeight={'bolder'}>
       Instant Videos
     </Box>
     <Box mr={'2rem'} fontSize={'1.8rem'} fontWeight={'bolder'} display={"flex"} >
 
       <Link to={"/profile"}> <Button bgColor={"teal.300"} border={"none"} shadow={"none"} mr={'2rem'}>
-      <span class="material-icons md-48">account_circle</span>
+      <span className="material-icons md-48">account_circle</span>
       </Button>
       </Link>
 
@@ -33,35 +32,35 @@ const [menuDisp, setMenuDisp] = useState("none")
 
   </Flex>
   <Flex direction={"column"} justifyContent={'start'} alignItems={"center"}  width={'5rem'} 
-    bgColor={'teal.300'} color={'teal.900'} position={"absolute"} pt={'4rem'} minHeight={"calc(100%)"}>
+    bgColor={'teal.300'} color={'teal.900'} position={"fixed"} pt={'4rem'} minHeight={"calc(100%)"}>
 
     <Link to={"/"}> <Button bgColor={"teal.300"} border={"none"} shadow={"none"} height={"5rem"} width={"100%"}
       textAlign={'center'} _focus={{border:'none',shadow:'none'}}>
-    <span class="material-icons md-48 ">home</span>
+    <span className="material-icons md-48 ">home</span>
     </Button>
     </Link>
 
     <Link to={"/explore"}> <Button bgColor={"teal.300"} border={"none"} shadow={"none"} height={"5rem"} width={"100%"}
       textAlign={'center'} _focus={{border:'none',shadow:'none'}}>
-    <span class="material-icons md-48 ">explore</span>
+    <span className="material-icons md-48 ">explore</span>
     </Button>
     </Link>
 
     <Link to={"/playlist"}> <Button bgColor={"teal.300"} border={"none"} shadow={"none"} height={"5rem"} width={"100%"}
       textAlign={'center'} _focus={{border:'none',shadow:'none'}}>
-    <span class="material-icons md-48 ">playlist_add</span>
+    <span className="material-icons md-48 ">playlist_add</span>
     </Button>
     </Link>
 
     <Link to={"/history"}> <Button bgColor={"teal.300"} border={"none"} shadow={"none"} height={"5rem"} width={"100%"}
       textAlign={'center'} _focus={{border:'none',shadow:'none'}}>
-    <span class="material-icons md-48 ">history</span>
+    <span className="material-icons md-48 ">history</span>
     </Button>
     </Link>
 
     <Link to={"/watchlater"}> <Button bgColor={"teal.300"} border={"none"} shadow={"none"} height={"5rem"}
       width={"100%"} textAlign={'center'} _focus={{border:'none',shadow:'none'}}>
-    <span class="material-icons md-48 ">watch_later</span>
+    <span className="material-icons md-48 ">watch_later</span>
     </Button>
     </Link>
   </Flex>
@@ -84,7 +83,7 @@ else{
     <Button bgColor={"teal.300"} border={"none"} shadow={"none"} mr={'2rem'}
     onClick={()=>menuDisp==='none'?setMenuDisp('flex'):setMenuDisp('none')}
     >
-      <span class="material-icons md-48">menu</span>
+      <span className="material-icons md-48">menu</span>
       </Button>
  
       <Box display={menuDisp} flexDirection={"column"} top={"4rem"} bgColor={"white"} border={"1px"} fontSize={'0.8rem'} position={"absolute"}
