@@ -10,7 +10,8 @@ export function PasswordInput() {
             <Input
                 pr='4.5rem'
                 type={show ? 'text' : 'password'}
-                placeholder='Enter password'  m={"none"}/>
+                placeholder='Enter password'  m={"none"}
+               />
             <InputRightElement width='4.5rem'>
                 <Button h='1.75rem' size='sm' onClick={handleClick}>
                     {show ? 'Hide' : 'Show'}

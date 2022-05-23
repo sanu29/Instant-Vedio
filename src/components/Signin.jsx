@@ -1,9 +1,13 @@
-import { Box, Button, Flex, Input, Stack, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Input, Stack, Text, InputGroup, InputRightElement } from '@chakra-ui/react';
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import { PasswordInput } from './PasswordInput'
 
 export default function Signin() {
+
+
+
   return (
    <>
    <Flex pt={"5rem"} bgColor={"teal.300"}  height={'100vh'} justifyContent={"center"} width={"calc(100%-64px)"}>

@@ -2,7 +2,7 @@ import { Box, Flex ,Text} from '@chakra-ui/react'
 import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom';
-import { slider1,slider2,slider3,category1,category2,category3,category4,category5 } from '../images/images'
+import { slider1,slider2,slider3,category1,category2,category3,category4,category5,category6 } from '../images/images'
 import Footer from './Footer';
 import { useInterval } from './useInterval';
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
   const goToNext = ()=>indexOfSlider<2?setIndexSlider(indexOfSlider=>indexOfSlider+1):setIndexSlider(0)
   const goToPrevious = ()=>indexOfSlider>0?setIndexSlider(indexOfSlider=>indexOfSlider-1):setIndexSlider(2)
   const categories = [{category:category1,title:"Sports"},{category:category4,title:"Kids"},{category:category3,title:"Web Series"},
-                      {category:category2,title:"Knowledge"},{category:category5,title:"Movies"}]
+                      {category:category2,title:"Knowledge"}, {category:category6,title:"Comedy"},{category:category5,title:"Movies"}]
   useInterval(()=>{
       goToNext()
   },5000)
@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <Flex pt={"5rem"} pl={'5rem'} direction={"column"} minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content">
       
-      <Box display={"flex"} margin={"1rem 4rem"} justifyContent={"center"} position={"relative"} minWidth={"90%"} maxWidth={"100%"} height={"18rem"}>
+      <Box display={"flex"} margin={"1rem 2rem"} justifyContent={"center"} position={"relative"} minWidth={"90%"} maxWidth={"100%"} height={"18rem"}>
       <Box className="material-icons" position={"absolute"} top={"7rem"} left={"0"} color={"white"} cursor={"pointer"}
             onClick={()=>goToPrevious()}
       >chevron_left</Box>

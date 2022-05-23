@@ -8,7 +8,7 @@ import Explorepage from "./pages/Explorepage";
 import WatchLaterpage from "./pages/WatchLaterpage";
 import Playlistpage from "./pages/Playlistpage";
 import Profilepage from "./pages/Profilepage";
-import Signuppage from "./pages/Signuppage";
+import {Signuppage} from "./pages/Signuppage";
 import Loginpage from "./pages/Loginpage";
 function App() {
   return (
