@@ -1,16 +1,32 @@
 import React, { useState } from 'react'
 import { Box, Button, Flex, Input, Stack, Text, InputGroup, InputRightElement } from '@chakra-ui/react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { PasswordInput } from './PasswordInput'
 import { useDispatch, useSelector } from "react-redux";
+import { SignupThunk } from '../slice/authSlice';
+import { Toast } from "./Toast";
 export  const Signup =() =>{
-  const [userDetails, setUserDetails] = useState({name:"saniyashaikh"}) 
+  const dispatch = useDispatch()
+  const [userDetails, setUserDetails] = useState({
+    firstname:"none",
+    lastname:"none",
+    email:"none",
+    password:"none"
+
+  }) 
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   const signupHandler = () => {
-    dispatch(Signup({name:"saniya"}))
+
+    dispatch(SignupThunk(userDetails))
+    .unwrap()
+    .then((data)=>{
+        Toast('Welcome ', data.createdUser.firstname)
+        navigate("/")
+      })
+    .catch((error)=>Toast(error.errors[0]))
   }
       return (
         <>
@@ -20,28 +36,28 @@ export  const Signup =() =>{
              <Box w={"100%"} textAlign={"center"} color={"teal.900"} fontSize={"1.5rem"} fontWeight={"bold"} mb={'1rem'}>Signup</Box>
              <Text>First Name</Text>
               <Input pr='4.5rem' placeholder='Enter First Name' h={'2.5rem'} m={"none"} 
-              // onChange={(e)=>setUserDetails({...userDetails,firstname:e.target.value})}
+              onChange={(e)=>setUserDetails({...userDetails,firstname:e.target.value})}
               />
        
               <Text>Last Name</Text>
               <Input pr='4.5rem' placeholder='Enter Last Name' h={'2.5rem'} m={"none"} 
-              // onChange={(e)=>setUserDetails({...userDetails,lastname:e.target.value})}
+              onChange={(e)=>setUserDetails({...userDetails,lastname:e.target.value})}
               />
          
              <Text>Email</Text>
             <Input pr='4.5rem' placeholder='Enter email id' h={'2.5rem'} m={"none"} 
-            // onChange={(e)=>setUserDetails({...userDetails,email:e.target.value})}
+            onChange={(e)=>setUserDetails({...userDetails,email:e.target.value})}
             />
             <Text>Password</Text>
             <InputGroup size='md'>
             <Input pr='4.5rem'  placeholder='Enter password'  m={"none"} 
-            // onChange={(e)=>setUserDetails({...userDetails,password:e.target.value})}
+            onChange={(e)=>setUserDetails({...userDetails,password:e.target.value})}
             />
             <InputRightElement width='4.5rem'>
                 <Button h='1.75rem' size='sm'
-                //  onClick={handleClick}
+                 onClick={handleClick}
                  >
-                    {/* {show ? 'Hide' : 'Show'} */}
+                    {show ? 'Hide' : 'Show'}
                 </Button>
             </InputRightElement>
         </InputGroup>

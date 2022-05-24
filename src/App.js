@@ -10,6 +10,9 @@ import Playlistpage from "./pages/Playlistpage";
 import Profilepage from "./pages/Profilepage";
 import {Signuppage} from "./pages/Signuppage";
 import Loginpage from "./pages/Loginpage";
+import MockmanEs from "mockman-js";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     < >
@@ -22,8 +25,19 @@ function App() {
         <Route path={"/login"} element={<Loginpage/>}/>
         <Route path={"/signup"} element={<Signuppage/>}/>
         <Route path={"/profile"} element={<Profilepage/>}/>
-
+        <Route path="/mock" element={<MockmanEs/>}/>
       </Routes>
+      <ToastContainer
+          position="top-right"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          />
     </>
   );
 }

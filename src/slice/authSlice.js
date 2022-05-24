@@ -1,19 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import {axios} from "axios"
+import axios from "axios"
+
+
 let initialState={
-   user:"none",
-   encodedToken:"none",
+    name:"signup",
+   user:localStorage.getItem("user")||"none",
+   encodedToken:localStorage.getItem("token") ||"none",
    error:"none",
    isLogin:false
 }
 
-export const Signup=createAsyncThunk(
+export const SignupThunk=createAsyncThunk(
     'auth/signup', 
     async(signupData, thunkAPI)=>{
-        const response = axios.post(`/api/auth/signup`,signupData);
-        console.log(response.data)
-        return response.data;
+        try{
+            const response = await axios.post(`/api/auth/signup`,signupData);
+            return response.data;
+        }
+        catch(error){
+            return thunkAPI.rejectWithValue(error.response.data)
+        }
     }
 ) 
 
@@ -23,14 +30,18 @@ export const authSlice = createSlice({
     initialState,
     reducers:{},
     extraReducers:{
-        [Signup.pending]:(state)=>{state.loading=true},
-        [Signup.fulfilled]:(state,action)=>{
+        [SignupThunk.pending]:(state)=>{state.loading=true
+        console.log(state.loading)},
+        [SignupThunk.fulfilled]:(state,action)=>{
                 state.loading=false
                 state.user=action.payload.createdUser
                 state.encodedToken=action.payload.encodedToken
                 localStorage.setItem('token',state.encodedToken)
-                localStorage.setItem('user', JSON.stringify(state.user))
-                console.log(state)
+                localStorage.setItem('user', JSON.stringify(state.user));    
+        },
+        [SignupThunk.rejected]:(state,action)=>{
+            state.loading=false
+            state.error = action.payload.errors
         }
     }
 })
