@@ -5,6 +5,7 @@ import { PasswordInput } from './PasswordInput'
 import { useDispatch, useSelector } from "react-redux";
 import { SignupThunk } from '../slice/authSlice';
 import { Toast } from "./Toast";
+import { SignUpValidation } from './SignUpValidation';
 export  const Signup =() =>{
   const dispatch = useDispatch()
   const [userDetails, setUserDetails] = useState({
@@ -17,17 +18,21 @@ export  const Signup =() =>{
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
-
+  const [error, setError] = useState("none")
+  console.log(error)
   const signupHandler = () => {
 
     dispatch(SignupThunk(userDetails))
     .unwrap()
     .then((data)=>{
-        Toast('Welcome ', data.createdUser.firstname)
+        Toast(`Welcome ${data.createdUser.firstname}`)
         navigate("/")
       })
     .catch((error)=>Toast(error.errors[0]))
   }
+
+
+
       return (
         <>
         <Flex pt={"3rem"} bgColor={"teal.300"}  minHeight={'100vh'}fontSize={'0.8rem'} justifyContent={"center"} width={"calc(100%-64px)"}>
@@ -37,6 +42,7 @@ export  const Signup =() =>{
              <Text>First Name</Text>
               <Input pr='4.5rem' placeholder='Enter First Name' h={'2.5rem'} m={"none"} 
               onChange={(e)=>setUserDetails({...userDetails,firstname:e.target.value})}
+              
               />
        
               <Text>Last Name</Text>
@@ -50,7 +56,7 @@ export  const Signup =() =>{
             />
             <Text>Password</Text>
             <InputGroup size='md'>
-            <Input pr='4.5rem'  placeholder='Enter password'  m={"none"} 
+            <Input pr='4.5rem'  placeholder='Enter password'  m={"none"}  type={show ? 'text' : 'password'}
             onChange={(e)=>setUserDetails({...userDetails,password:e.target.value})}
             />
             <InputRightElement width='4.5rem'>
@@ -62,7 +68,18 @@ export  const Signup =() =>{
             </InputRightElement>
         </InputGroup>
             <Text pt={'1rem'}></Text>
-             <Button bgColor={"teal.300"} color={"teal.900"}  fontWeight={"bold"} onClick={()=>signupHandler()}>Submit</Button>
+             <Button bgColor={"teal.300"} color={"teal.900"}  fontWeight={"bold"} onClick={()=>{
+               const validation = SignUpValidation(userDetails)
+               console.log(validation)
+               if(validation.status === true)
+               {
+                signupHandler()
+               }
+               else{
+                 setError(error=>validation.error)
+               }
+              
+               }}>Submit</Button>
              <Link to={"/login"}>
                <Text  textAlign={"center"} fontSize={'0.8rem'} cursor={"pointer"} pb={"1rem"}  pt={"1rem"}>Already Have Account?</Text>
              </Link>

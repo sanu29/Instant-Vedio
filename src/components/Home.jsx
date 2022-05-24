@@ -17,7 +17,7 @@ export default function Home() {
   useInterval(()=>{
       goToNext()
   },5000)
-  
+  let i =0;
   
   return (
     <Flex pt={"5rem"} pl={'5rem'} direction={"column"} minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content">
@@ -37,7 +37,7 @@ export default function Home() {
         <Flex justifyContent={"center"}>
           {categories.map((item)=>{
             return(
-              <Link to={"/explore"}>
+              <Link to={"/explore"} key={i++}>
               <Box bgColor={'#ffffff'} height={"14rem"} width={"10rem"}  margin={"1rem"} boxShadow={"lg"} border={"1px"} borderColor={"gray.200"}>
               <img src={item.category} className="categoryImage"/>
               <Text textAlign={"center"} fontSize={"1.2rem"} fontWeight={"bold"}>{item.title}</Text>
@@ -52,7 +52,7 @@ export default function Home() {
         <Flex justifyContent={"center"}>
           {categories.map((item)=>{
             return(
-              <Link to={"/explore"}>
+              <Link to={"/explore"} key={i++}>
               <Box bgColor={'#ffffff'} height={"14rem"} width={"10rem"}  margin={"1rem"} boxShadow={"lg"} border={"1px"} borderColor={"gray.200"}>
               <img src={item.category} className="categoryImage"/>
               <Text textAlign={"center"} fontSize={"1.2rem"} fontWeight={"bold"}>{item.title}</Text>
