@@ -13,19 +13,25 @@ import Loginpage from "./pages/Loginpage";
 import MockmanEs from "mockman-js";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { PrivateRoutes } from "./routes/PrivateRoutes";
+import { RestrictedRoutes } from "./routes/RestrictedRoutes";
 function App() {
   return (
     < >
       <Routes>
         <Route path={"/"} element={<Homepage/>}/>
-        <Route path={"/history"} element={<Historypage/>}/>
         <Route path={"/explore"} element={<Explorepage/>}/>
-        <Route path={"/watchlater"} element={<WatchLaterpage/>}/>
-        <Route path={"/playlist"} element={<Playlistpage/>}/>
+        <Route element={<PrivateRoutes/>}>
+            <Route path={"/watchlater"} element={<WatchLaterpage/>}/>
+            <Route path={"/playlist"} element={<Playlistpage/>}/>
+            <Route path={"/profile"} element={<Profilepage/>}/>
+            <Route path={"/history"} element={<Historypage/>}/>
+        </Route>
+       <Route path="/mock" element={<MockmanEs/>}/>
+       <Route element={<RestrictedRoutes/>}>
         <Route path={"/login"} element={<Loginpage/>}/>
         <Route path={"/signup"} element={<Signuppage/>}/>
-        <Route path={"/profile"} element={<Profilepage/>}/>
-        <Route path="/mock" element={<MockmanEs/>}/>
+        </Route>
       </Routes>
       <ToastContainer
           position="top-right"

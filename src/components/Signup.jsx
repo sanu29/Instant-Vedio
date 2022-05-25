@@ -36,6 +36,8 @@ export  const Signup =() =>{
       return (
         <>
         <Flex pt={"3rem"} bgColor={"teal.300"}  minHeight={'100vh'}fontSize={'0.8rem'} justifyContent={"center"} width={"calc(100%-64px)"}>
+               
+               
                 <Flex bgColor={"gray.50"}  minWidth={"24rem"} height={'33rem'} maxWidth={"30rem"} mt={'1rem'} position={"relative"} rounded='md'padding={"1rem 3rem"} boxShadow='2xl' >
                <Stack w={'100%'}>
              <Box w={"100%"} textAlign={"center"} color={"teal.900"} fontSize={"1.5rem"} fontWeight={"bold"} mb={'1rem'}>Signup</Box>

@@ -2,10 +2,33 @@ import React from 'react'
 import { Box, Button, Flex, Text, useMediaQuery } from "@chakra-ui/react"
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Logout } from '../slice/authSlice'
 export default function Header() {
 
 const [isLargerThan620] = useMediaQuery('(min-width: 620px)')
 const [menuDisp, setMenuDisp] = useState("none")
+const authState = useSelector(state=>state.authReducer)
+const dispatch = useDispatch()
+const authButton = () =>
+{ if(authState.isLogin)
+ {
+   return (
+       
+         <Button bgColor='teal.900' color={'white'} border={'0.5px'}
+           _hover={{color:'teal.900',bgColor:"teal.300"}}
+           onClick={()=>dispatch(Logout())}
+           >Logout</Button>
+    
+   )}
+return(
+     <Link to={"/login"}>
+     <Button bgColor='teal.900' color={'white'} border={'0.5px'}
+       _hover={{color:'teal.900',bgColor:"teal.300"}}>Login</Button>
+     </Link>)
+
+}
+console.log(authState)
   if(isLargerThan620)
   {
     return(
@@ -21,12 +44,8 @@ const [menuDisp, setMenuDisp] = useState("none")
       <span className="material-icons md-48">account_circle</span>
       </Button>
       </Link>
-
-      <Link to={"/login"}>
-      <Button bgColor='teal.900' color={'white'} border={'0.5px'}
-        _hover={{color:'teal.900',bgColor:"teal.300"}}>Login</Button>
-      </Link>
-
+      
+      {authButton()}
 
     </Box>
 
