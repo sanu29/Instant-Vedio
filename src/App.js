@@ -1,42 +1,44 @@
 import "./App.css";
-import logo from "./logo.png";
-
+import { Box } from "@chakra-ui/react"
+import Header from "./components/Header"
+import { Route, Routes } from "react-router-dom";
+import Homepage from "./pages/Homepage";
+import Historypage from "./pages/Historypage";
+import Explorepage from "./pages/Explorepage";
+import WatchLaterpage from "./pages/WatchLaterpage";
+import Playlistpage from "./pages/Playlistpage";
+import Profilepage from "./pages/Profilepage";
+import {Signuppage} from "./pages/Signuppage";
+import Loginpage from "./pages/Loginpage";
+import MockmanEs from "mockman-js";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} alt="mockBee logo" width="180" height="180" />
-        <h1 className="brand-title">
-          Welcome to <span>mockBee!</span>
-        </h1>
-        <p className="brand-description">
-          Get started by editing <code>src/App.js</code>
-        </p>
-        <div className="links">
-          <a
-            href="https://mockbee.netlify.app/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Explore mockBee
-          </a>
-          <a
-            href="https://mockbee.netlify.app/docs/api/introduction"
-            target="_blank"
-            rel="noreferrer"
-          >
-            API Documentation
-          </a>
-          <a
-            href="https://github.com/neogcamp/mockBee"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Contribute
-          </a>
-        </div>
-      </header>
-    </div>
+    < >
+      <Routes>
+        <Route path={"/"} element={<Homepage/>}/>
+        <Route path={"/history"} element={<Historypage/>}/>
+        <Route path={"/explore"} element={<Explorepage/>}/>
+        <Route path={"/watchlater"} element={<WatchLaterpage/>}/>
+        <Route path={"/playlist"} element={<Playlistpage/>}/>
+        <Route path={"/login"} element={<Loginpage/>}/>
+        <Route path={"/signup"} element={<Signuppage/>}/>
+        <Route path={"/profile"} element={<Profilepage/>}/>
+        <Route path="/mock" element={<MockmanEs/>}/>
+      </Routes>
+      <ToastContainer
+          position="top-right"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          />
+    </>
   );
 }
 
