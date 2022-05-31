@@ -25,6 +25,7 @@ export  const Signup =() =>{
     dispatch(SignupThunk(userDetails))
     .unwrap()
     .then((data)=>{
+      console.log("hie")
         Toast(`Welcome ${data.createdUser.firstname}`)
         navigate("/")
       })

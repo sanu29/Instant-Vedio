@@ -48,7 +48,8 @@ export const authSlice = createSlice({
         }
     },
     extraReducers:{
-        [SignupThunk.pending]:(state)=>{state.loading=true
+        [SignupThunk.pending]:(state)=>{
+            state.loading=true;
         console.log(state.loading)},
         [SignupThunk.fulfilled]:(state,action)=>{
                 state.loading=false
