@@ -7,7 +7,7 @@ let initialState={
    user:localStorage.getItem("user")||"none",
    encodedToken:localStorage.getItem("token") ||"none",
    error:"none",
-   isLogin:false
+   isLogin:localStorage.getItem("user")?true:false
 }
 
 export const SignupThunk=createAsyncThunk(

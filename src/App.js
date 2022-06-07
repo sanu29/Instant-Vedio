@@ -15,12 +15,14 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PrivateRoutes } from "./routes/PrivateRoutes";
 import { RestrictedRoutes } from "./routes/RestrictedRoutes";
+import { Singlepage } from "./pages/Singlepage";
 function App() {
   return (
     < >
       <Routes>
         <Route path={"/"} element={<Homepage/>}/>
         <Route path={"/explore"} element={<Explorepage/>}/>
+        <Route path="/vedio/:vedioId" element={<Singlepage/>}/>
         <Route element={<PrivateRoutes/>}>
             <Route path={"/watchlater"} element={<WatchLaterpage/>}/>
             <Route path={"/playlist"} element={<Playlistpage/>}/>

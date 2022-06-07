@@ -36,7 +36,9 @@ export default function Signin() {
         <Box w={"100%"} textAlign={"center"} color={"teal.900"} fontSize={"2rem"} fontWeight={"bold"} mb={'1rem'}>Login</Box>
           
         <Text>Username</Text>
-                  <Input pr='4.5rem' placeholder='Enter username' h={'2.5rem'} m={"none"} onChange={(e)=>setUserDetails({...userDetails,email:e.target.value})}/>
+                  <Input pr='4.5rem' placeholder='Enter username' h={'2.5rem'} m={"none"} onChange={(e)=>setUserDetails({...userDetails,email:e.target.value})}
+                    value={userDetails.email==="none"?"":userDetails.email}
+                  />
           <Text>Password</Text>
           <InputGroup size='md'>
             <Input
@@ -44,6 +46,7 @@ export default function Signin() {
                 type={show ? 'text' : 'password'}
                 placeholder='Enter password'  m={"none"}
                 onChange={(e)=>setUserDetails({...userDetails,password:e.target.value})}
+                value={userDetails.password==="none"?"":userDetails.password}
                />
             <InputRightElement width='4.5rem'>
                 <Button h='1.75rem' size='sm' onClick={handleClick}>
@@ -51,7 +54,11 @@ export default function Signin() {
                 </Button>
             </InputRightElement>
         </InputGroup>
-        <Text  textAlign={"right"} fontSize={'0.8rem'} cursor={"pointer"} pb={"4px"}  pt={"4px"}>Login as guest</Text>
+        <Text  textAlign={"right"} fontSize={'0.8rem'} cursor={"pointer"} pb={"4px"}  pt={"4px"}
+        onClick={()=>{
+          setUserDetails({...userDetails,email:"test@gmail.com", password:"Test12345"})
+        
+        }}>Login as guest</Text>
 
         <Button bgColor={"teal.300"} color={"teal.900"}  fontWeight={"bold"}
         onClick = {()=>{LoginHandler()}}
