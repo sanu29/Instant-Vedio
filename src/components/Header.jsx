@@ -54,31 +54,31 @@ console.log(authState)
     bgColor={'teal.300'} color={'teal.900'} position={"fixed"} pt={'4rem'} minHeight={"calc(100%)"}>
 
     <Link to={"/"}> <Button bgColor={"teal.300"} border={"none"} shadow={"none"} height={"5rem"} width={"100%"}
-      textAlign={'center'} _focus={{border:'none',shadow:'none'}}>
+      textAlign={'center'} _focus={{border:'none',shadow:'none'}} title="HOME">
     <span className="material-icons md-48 ">home</span>
     </Button>
     </Link>
 
     <Link to={"/explore"}> <Button bgColor={"teal.300"} border={"none"} shadow={"none"} height={"5rem"} width={"100%"}
-      textAlign={'center'} _focus={{border:'none',shadow:'none'}}>
+      textAlign={'center'} _focus={{border:'none',shadow:'none'}} title="Explore">
     <span className="material-icons md-48 ">explore</span>
     </Button>
     </Link>
 
     <Link to={"/playlist"}> <Button bgColor={"teal.300"} border={"none"} shadow={"none"} height={"5rem"} width={"100%"}
-      textAlign={'center'} _focus={{border:'none',shadow:'none'}}>
+      textAlign={'center'} _focus={{border:'none',shadow:'none'}} title="Playlist">
     <span className="material-icons md-48 ">playlist_add</span>
     </Button>
     </Link>
 
     <Link to={"/history"}> <Button bgColor={"teal.300"} border={"none"} shadow={"none"} height={"5rem"} width={"100%"}
-      textAlign={'center'} _focus={{border:'none',shadow:'none'}}>
+      textAlign={'center'} _focus={{border:'none',shadow:'none'}} title="History">
     <span className="material-icons md-48 ">history</span>
     </Button>
     </Link>
 
     <Link to={"/watchlater"}> <Button bgColor={"teal.300"} border={"none"} shadow={"none"} height={"5rem"}
-      width={"100%"} textAlign={'center'} _focus={{border:'none',shadow:'none'}}>
+      width={"100%"} textAlign={'center'} _focus={{border:'none',shadow:'none'}} title="Watch Later">
     <span className="material-icons md-48 ">watch_later</span>
     </Button>
     </Link>
