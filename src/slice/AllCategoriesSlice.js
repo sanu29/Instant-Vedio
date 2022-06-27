@@ -29,7 +29,7 @@ export const AllCategoriesSlice = createSlice({
             state.category = action.payload
         },
         [getAllCategories.rejected] : (state,action)=>{
-            console.log(action)
+            //console.log(action)
         }
     }
 })

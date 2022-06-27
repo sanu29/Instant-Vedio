@@ -28,7 +28,7 @@ return(
      </Link>)
 
 }
-console.log(authState)
+//console.log(authState)
   if(isLargerThan620)
   {
     return(

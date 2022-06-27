@@ -19,13 +19,13 @@ export  const Signup =() =>{
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
   const [error, setError] = useState("none")
-  console.log(error)
+  //console.log(error)
   const signupHandler = () => {
 
     dispatch(SignupThunk(userDetails))
     .unwrap()
     .then((data)=>{
-      console.log("hie")
+      //console.log("hie")
         Toast(`Welcome ${data.createdUser.firstname}`)
         navigate("/")
       })
@@ -73,7 +73,7 @@ export  const Signup =() =>{
             <Text pt={'1rem'}></Text>
              <Button bgColor={"teal.300"} color={"teal.900"}  fontWeight={"bold"} onClick={()=>{
                const validation = SignUpValidation(userDetails)
-               console.log(validation)
+               //console.log(validation)
                if(validation.status === true)
                {
                 signupHandler()

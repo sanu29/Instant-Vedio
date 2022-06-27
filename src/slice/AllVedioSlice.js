@@ -7,6 +7,7 @@ const initialState = {
     error:{},
 }
 
+
 export const getAllVedios =  createAsyncThunk(`get/allVedios`, async(thunkAPI)=>{
     try{
         const response = await axios.get(`/api/videos`);
@@ -25,11 +26,11 @@ export const AllVedioSlice = createSlice({
     extraReducers:{
         [getAllVedios.pending] : (state)=>console.log(state.loading),
         [getAllVedios.fulfilled] : (state,action)=>{
-            console.log(action.payload)
+            //console.log(action.payload)
             state.vedioList = action.payload
         },
         [getAllVedios.rejected] : (state,action)=>{
-            console.log(action)
+            //console.log(action)
             // state.error = action.payload
         }
     }

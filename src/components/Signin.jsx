@@ -20,7 +20,7 @@ export default function Signin() {
     dispatch(LoginThunk(userDetails))
     .unwrap()
     .then((data)=>{
-      console.log(data)
+      //console.log(data)
         Toast(`Welcome ${data.foundUser.firstname}`)
         navigate("/")
       })

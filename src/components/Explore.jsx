@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { getAllCategories } from '../slice/AllCategoriesSlice';
 import {All,Sports,Kids,WebSeries,Knowledge,Movies} from '../slice/filteredSlice';
 import filteredSlice from '../slice/filteredSlice';
+import { addToHistory } from '../slice/AllHistory';
 export const Explore = () => {
 const allData =useSelector(state=>state.AllVedioSlice)
 const dispatch  = useDispatch();
@@ -47,15 +48,20 @@ const allCategories =useSelector(state=>state.AllCategoriesSlice)
           {(allData.vedioList)==="loading"?  <ReactLoading type={'spin'} color="#4FD1C5" />:(allData.vedioList).filter(item=>filteredSlice==="All"?item:item.categoryName===filteredSlice?item:"").map((item)=>{
                         return(
             
-                          <Box bgColor={'#ffffff'} display={"flex"} flexDirection={"column"} position={"relative"} height={"18rem"} width={"15rem"}  margin={"1rem"} boxShadow={"lg"} border={"1px"} borderColor={"gray.300"}>
+                          <Box bgColor={'#ffffff'} display={"flex"} flexDirection={"column"} position={"relative"} height={"18rem"} width={"15rem"}  margin={"1rem"} boxShadow={"lg"} border={"1px"} borderColor={"gray.300"}
+                          key={item._id}
+                          >
                           <img src={item.thumbnail} className="categoryImage"/>
                           <Text p={'0.5rem'} fontWeight={"semibold"} pb={0}>{item.title}</Text>
                          <Flex alignItems={"center"} justifyContent={"flex-end"}>
-                          <span class="material-icons  sm-48"  >visibility</span>
+                          <span className="material-icons  sm-48"  >visibility</span>
                           <Text p={'0.5rem'} color={"gray.500"} fontSize={"0.8rem"} pb={'0.5rem'} pl={"0"}>{item.views}</Text>
                          </Flex>
                           <Link to={"/vedio/"+item._id}>
-                          <Button colorScheme='teal' bgcolor={"teal.900"} w="100%" borderRadius={"none"} position={"absolute"} bottom={"0px"} variant='solid' alignSelf={"flex-end"} justifySelf={"end"} >Watch Now</Button>
+                          <Button colorScheme='teal' bgcolor={"teal.900"} w="100%" borderRadius={"none"} position={"absolute"} bottom={"0px"} variant='solid' alignSelf={"flex-end"} justifySelf={"end"} 
+                          onClick={()=>dispatch( addToHistory(item))}
+                          
+                          >Watch Now</Button>
                           </Link>
                           </Box>
           )})}
