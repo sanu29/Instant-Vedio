@@ -26,12 +26,10 @@ export const AllVedioSlice = createSlice({
     extraReducers:{
         [getAllVedios.pending] : (state)=>console.log(state.loading),
         [getAllVedios.fulfilled] : (state,action)=>{
-            //console.log(action.payload)
-            state.vedioList = action.payload
+                        state.vedioList = action.payload
         },
         [getAllVedios.rejected] : (state,action)=>{
-            //console.log(action)
-            // state.error = action.payload
+          
         }
     }
 })

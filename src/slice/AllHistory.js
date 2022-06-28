@@ -12,13 +12,11 @@ export const addToHistory=createAsyncThunk(
     'history/add', 
     async(video, thunkAPI)=>{
         try{
-            const authState = useSelector(state=>state.authReducer)
-            console.log(authState.encodedToken)
             const response = await axios({
                 method: 'post',
                 url: `/api/user/history`,
                 headers: {
-                    authorization: authState.encodedToken,
+                    authorization: localStorage.getItem('token'),
                 },
                 data: {
                     video: video
@@ -26,8 +24,7 @@ export const addToHistory=createAsyncThunk(
             }
 
             )
-            console.log('History'+response)
-            return response.data;
+           return response.data;
         }
         catch(error){
             return thunkAPI.rejectWithValue(error)
@@ -36,21 +33,74 @@ export const addToHistory=createAsyncThunk(
 ) 
 
 
-// export const getHistory=createAsyncThunk(
-//     'history/get', 
-//     async(thunkAPI)=>{
-//         try{
-//             const authState = useSelector(state=>state.authReducer)
-//             const response = await axios.get(`/api/user/history`,{
-//                 authorization : authState.encodedToken,
-//                });
-//             return response.data;
-//         }
-//         catch(error){
-//             return thunkAPI.rejectWithValue(error.response.data)
-//         }
-//     }
-// ) 
+export const getHistory=createAsyncThunk(
+    'history/get', 
+    async(thunkAPI)=>{
+        try{
+            const response = await axios({
+                method: 'get',
+                url: `/api/user/history`,
+                headers: {
+                    authorization: localStorage.getItem('token'),
+                }
+            }
+
+            )
+            return response.data;
+        }
+        catch(error){
+            return thunkAPI.rejectWithValue(error.response.data)
+        }
+    }
+) 
+
+
+export const deleteHistory=createAsyncThunk(
+    'history/delete', 
+    async(videoId,thunkAPI)=>{
+        try{
+            const response = await axios({
+                method: 'delete',
+                url: `/api/user/history/${videoId}`,
+                headers: {
+                    authorization: localStorage.getItem('token'),
+                }
+            }
+
+            )
+            console.log(response.data)
+            return response.data;
+        }
+        catch(error){
+            return thunkAPI.rejectWithValue(error.response.data)
+        }
+    }
+) 
+
+
+export const deleteHistoryAll=createAsyncThunk(
+    'history/deleteAll', 
+    async(videoId,thunkAPI)=>{
+        try{
+            const response = await axios({
+                method: 'delete',
+                url: `/api/user/history/all`,
+                headers: {
+                    authorization: localStorage.getItem('token'),
+                }
+            }
+
+            )
+            console.log(response.data)
+            return response.data;
+        }
+        catch(error){
+            return thunkAPI.rejectWithValue(error.response.data)
+        }
+    }
+) 
+
+
 export const historySlice  = createSlice({
     name:"historySlice",
     initialState,
@@ -63,27 +113,44 @@ export const historySlice  = createSlice({
         [addToHistory.fulfilled]:(state,action)=>{
                 
                 state.history=action.payload.history
-                console.log('status'+state.history)
-
-         
         },
         [addToHistory.rejected]:(state,action)=>{
                       state.error = action.payload
-                      console.log(action)
-        }
-        // [getHistory.pending]:(state)=>{
-        //     state.history='loading';
-        // console.log(state)},
-        // [getHistory.fulfilled]:(state,action)=>{
+                    
+        },
+        [getHistory.pending]:(state)=>{
+            state.history='loading';
+        },
+        [getHistory.fulfilled]:(state,action)=>{
                 
-        //         state.history=action.payload.history
-        //         console.log('status'+state.history)
-         
-        // },
-        // [getHistory.rejected]:(state,action)=>{
-        //                state.error = action.payload
-        // }
+                state.history=action.payload.history
+                     
+        },
+        [getHistory.rejected]:(state,action)=>{
+                       state.error = action.payload
+        },
+        [deleteHistory.pending]:(state)=>{
+            state.history='loading';
+        console.log(state.history)},
+        [deleteHistory.fulfilled]:(state,action)=>{
+                
+                state.history=action.payload.history
+        },
+        [deleteHistory.rejected]:(state,action)=>{
+                      state.error = action.payload
+                    
+        },
+        [deleteHistoryAll.pending]:(state)=>{
+            state.history='loading';
+        console.log(state.history)},
+        [deleteHistoryAll.fulfilled]:(state,action)=>{
+                
+                state.history=action.payload.history
+        },
+        [deleteHistoryAll.rejected]:(state,action)=>{
+                      state.error = action.payload
+                    
+        }
     }
 })
-export const {Logout} = historySlice.actions
 export default historySlice.reducer

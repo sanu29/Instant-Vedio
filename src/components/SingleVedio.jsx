@@ -3,6 +3,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { getHistory, historySlice } from '../slice/AllHistory'
 
 
 export  const  SingleVedio = () => {
@@ -13,12 +14,13 @@ export  const  SingleVedio = () => {
   useEffect(()=>{
     (async()=>{
          const vedioData = await axios.get(`/api/video/${params.vedioId}`)
-        setSingleVedioData(vedioData.data.video)
+        setSingleVedioData(vedioData.data.video);
+      
+
     })()
   
   },[])
 
-  //console.log(singeVedioData)
 
 
   if(singeVedioData === "loading")

@@ -10,6 +10,7 @@ import { useInterval } from './useInterval';
 import ReactLoading from "react-loading";
 import { getAllVedios } from '../slice/AllVedioSlice';
 import {All,Sports,Kids,WebSeries,Knowledge,Movies} from '../slice/filteredSlice';
+import { addToHistory } from '../slice/AllHistory';
 export default function Home() {
   
 
@@ -41,7 +42,7 @@ export default function Home() {
       <Box className="material-icons" position={"absolute"} top={"7rem"} left={"0"} color={"white"} cursor={"pointer"}
             onClick={()=>goToPrevious()}>chevron_left</Box>
       <Link to={"/vedio/"+sliderImageArray[indexOfSlider].link} style={{width:'100%',display:"flex"}} >
-        <img src={sliderImageArray[indexOfSlider].img} width={"100%"}/>
+        <img src={sliderImageArray[indexOfSlider].img} width={"100%"}  />
         </Link>
         <Box className="material-icons" position={"absolute"} top={"7rem"} right={"0"} color={"white"} cursor={"pointer"}
       onClick={()=>goToNext()}
@@ -93,7 +94,9 @@ export default function Home() {
         {(allData.vedioList)==="loading"?  <ReactLoading type={'spin'} color="#4FD1C5" />:(allData.vedioList).filter((item)=>item.trending===true).map((item)=>{
             return(
               <Link to={"/vedio/"+item._id} key={item._id} >
-              <Box bgColor={'#ffffff'} className={"trending"} height={"fit-content"} width={"15rem"}  margin={"1rem"} boxShadow={"lg"} border={"1px"} borderColor={"gray.200"}>
+              <Box bgColor={'#ffffff'} className={"trending"} height={"fit-content"} width={"15rem"}  margin={"1rem"} boxShadow={"lg"} border={"1px"} borderColor={"gray.200"}
+               onClick={()=>dispatch( addToHistory(item))}
+              >
               <img src={item.thumbnail} className="categoryImage"/>
               <Text pl={'5px'} fontWeight={"semibold"} marginTop={"1rem"}>{item.title}</Text>
               <Button colorScheme='teal' w="100%" borderRadius={"none"} marginTop={'1rem'} variant='solid' >Watch Now</Button>
