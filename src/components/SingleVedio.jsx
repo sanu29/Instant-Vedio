@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getHistory, historySlice } from '../slice/AllHistory'
+import { addToWatchlater, deleteWatchlater, getWatchlater } from '../slice/AllWatchlater'
 
 
 export  const  SingleVedio = () => {
@@ -15,15 +16,19 @@ export  const  SingleVedio = () => {
     (async()=>{
          const vedioData = await axios.get(`/api/video/${params.vedioId}`)
         setSingleVedioData(vedioData.data.video);
-      
+        dispatch(getWatchlater())
 
     })()
   
   },[])
 
+  const watchLaterData = useSelector(state=>state.AllWatchLater)
+  const fillIcon = () =>{
+    const status = (watchLaterData.watchlater).find((item)=>item._id == singeVedioData._id)
+    return (status==undefined?false:true)
+  }
 
-
-  if(singeVedioData === "loading")
+  if(singeVedioData === "loading"||watchLaterData.watchlater === "loading")
   {
     return  <Flex pt={"5rem"} pl={'6rem'} direction={"column"} w={"100%"} justifyContent={""} alignItems={""} minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content" >
       saniya
@@ -44,7 +49,17 @@ export  const  SingleVedio = () => {
           </Flex>
           <Flex alignItems={"center"} >
             <Box margin={'1rem'} cursor={"pointer"}><span className="material-icons md-48  " title={"Add to Playlist"}>playlist_add</span></Box>
-            <Box margin={'1rem'} cursor={"pointer"}> <span className="material-symbols-outlined md-48 " title={"Add to Watchlater"}>watch_later</span></Box>
+            <Box margin={'1rem'} cursor={"pointer"} onClick={()=>{
+                  const getElement = (watchLaterData.watchlater).find((item)=>item._id==singeVedioData._id)
+                  if(getElement===undefined)
+                  {
+                    dispatch( addToWatchlater(singeVedioData))
+                  }
+                  else{
+                  {
+                    dispatch( deleteWatchlater(singeVedioData._id))
+                  }
+                  }}}> <span className={fillIcon()?'material-icons  md-48':"material-symbols-outlined  md-48"} title={"Add to Watchlater"}>watch_later</span></Box>
             <Box margin={'1rem'} cursor={"pointer"}> <span className="material-symbols-outlined md-48 " title={"Like"}>thumb_up</span></Box>
         </Flex>
       </Flex>

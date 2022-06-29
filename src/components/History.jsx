@@ -40,10 +40,7 @@ export const History = () =>{
                 
                <Flex alignItems={"center"} margin={"1rem"}>
                         <Box margin={'5px'} cursor={"pointer"}><span className="material-icons  " title={"Delete From History"} onClick={()=>dispatch(deleteHistory(item._id))}>delete</span></Box>
-                        <Box margin={'5px'} cursor={"pointer"}><span className="material-icons  " title={"Add to Playlist"}>playlist_add</span></Box>
-                        <Box margin={'5px'} cursor={"pointer"}> <span className="material-symbols-outlined " title={"Add to Watchlater"}>watch_later</span></Box>
-                        <Box margin={'5px'} cursor={"pointer"}> <span className="material-symbols-outlined  " title={"Like"}>thumb_up</span></Box>
-                    </Flex>
+                </Flex>
           
                </Flex>
                 </Box>
