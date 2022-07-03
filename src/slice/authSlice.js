@@ -50,7 +50,8 @@ export const authSlice = createSlice({
     extraReducers:{
         [SignupThunk.pending]:(state)=>{
             state.loading=true;
-        console.log(state.loading)},
+        //console.log(state.loading)
+    },
         [SignupThunk.fulfilled]:(state,action)=>{
                 state.loading=false
                 state.isLogin = true;
@@ -68,7 +69,7 @@ export const authSlice = createSlice({
             state.loading=false
             state.isLogin = true;
             state.user=action.payload.foundUser
-            console.log(state.user)
+            //console.log(state.user)
             state.encodedToken=action.payload.encodedToken
             localStorage.setItem('token',state.encodedToken)
             localStorage.setItem('user', JSON.stringify(state.user)); 

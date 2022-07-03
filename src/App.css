@@ -58,3 +58,15 @@ padding: 1rem;
   
 }
 }
+
+.trending:hover{
+  background-color: #1D4044;
+  color: #ffff;
+}
+
+.categories:hover{
+    height: 100%;
+    width: 100%;
+    opacity: 0.75;
+    transition: 0.2s;
+}
