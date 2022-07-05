@@ -36,7 +36,7 @@ export const Watchlater = () =>{
                <Flex alignItems={"center"} justifyContent={"space-between"}>
                 
                <Text p={'0.5rem'} fontWeight={"semibold"} pb={0} w={'90%'}>{item.title}</Text>
-               <Box marginRight={'5px'} cursor={"pointer"} display={"flex"} alignItems={"center"} justifyContent={"center"}  marginLeft={"1rem"} marginRight={"1rem"}><span className="material-icons  " title={"Delete From watchlater"} onClick={()=>dispatch(deleteWatchlater(item._id))}>watch_later</span></Box>
+               <Box marginRight={'5px'} cursor={"pointer"} display={"flex"} alignItems={"center"} justifyContent={"center"}  marginLeft={"1rem"}><span className="material-icons  " title={"Delete From watchlater"} onClick={()=>dispatch(deleteWatchlater(item._id))}>watch_later</span></Box>
                </Flex>
                 </Box>
             )

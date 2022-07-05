@@ -5,17 +5,17 @@ import { useSelector } from 'react-redux'
 
 
 let initialState={
-    watchlater:'loading',
+    likes:'loading',
     error:''
 }
 
-export const addToWatchlater=createAsyncThunk(
-    'watchlater/add', 
+export const addToLikes=createAsyncThunk(
+    'like/add', 
     async(video, thunkAPI)=>{
         try{
             const response = await axios({
                 method: 'post',
-                url: `/api/user/watchlater`,
+                url: `/api/user/likes`,
                 headers: {
                     authorization: localStorage.getItem('token'),
                 },
@@ -34,13 +34,13 @@ export const addToWatchlater=createAsyncThunk(
 ) 
 
 
-export const getWatchlater=createAsyncThunk(
-    'watchlater/get', 
+export const getLikes=createAsyncThunk(
+    'likes/get', 
     async(thunkAPI)=>{
         try{
             const response = await axios({
                 method: 'get',
-                url: `/api/user/watchlater`,
+                url: `/api/user/likes`,
                 headers: {
                     authorization: localStorage.getItem('token'),
                 }
@@ -56,13 +56,13 @@ export const getWatchlater=createAsyncThunk(
 ) 
 
 
-export const deleteWatchlater=createAsyncThunk(
-    'watchlater/delete', 
+export const deleteLikes=createAsyncThunk(
+    'likes/delete', 
     async(videoId,thunkAPI)=>{
         try{
             const response = await axios({
                 method: 'delete',
-                url: `/api/user/watchlater/${videoId}`,
+                url: `/api/user/likes/${videoId}`,
                 headers: {
                     authorization: localStorage.getItem('token'),
                 }
@@ -78,47 +78,47 @@ export const deleteWatchlater=createAsyncThunk(
     }
 ) 
 
-export const watchlaterSlice  = createSlice({
-    name:"watchlaterSlice",
+export const likesSlice  = createSlice({
+    name:"likesSlice",
     initialState,
     reducers:{
             },
     extraReducers:{
-        [addToWatchlater.pending]:(state)=>{
+        [addToLikes.pending]:(state)=>{
          
-        console.log(state.watchlater)},
-        [addToWatchlater.fulfilled]:(state,action)=>{
+        console.log(state.likes)},
+        [addToLikes.fulfilled]:(state,action)=>{
                 
-                state.watchlater=action.payload.watchlater
-                console.log(state.watchlater)
+                state.likes=action.payload.likes
+                console.log(state.likes)
         },
-        [addToWatchlater.rejected]:(state,action)=>{
+        [addToLikes.rejected]:(state,action)=>{
                       state.error = action.payload
                     
         },
-        [getWatchlater.pending]:(state)=>{
-            state.watchlater='loading';
+        [getLikes.pending]:(state)=>{
+            state.likes='loading';
         },
-        [getWatchlater.fulfilled]:(state,action)=>{
+        [getLikes.fulfilled]:(state,action)=>{
                 
-                state.watchlater=action.payload.watchlater;
-                console.log(state.watchlater)
+                state.likes=action.payload.likes;
+                console.log(state.likes)
                      
         },
-        [getWatchlater.rejected]:(state,action)=>{
+        [getLikes.rejected]:(state,action)=>{
                        state.error = action.payload
         },
-        [deleteWatchlater.pending]:(state)=>{
+        [deleteLikes.pending]:(state)=>{
         
-        console.log(state.watchlater)},
-        [deleteWatchlater.fulfilled]:(state,action)=>{
+        console.log(state.likes)},
+        [deleteLikes.fulfilled]:(state,action)=>{
                 
-                state.watchlater=action.payload.watchlater
+                state.likes=action.payload.likes
         },
-        [deleteWatchlater.rejected]:(state,action)=>{
+        [deleteLikes.rejected]:(state,action)=>{
                       state.error = action.payload
                     
         }
     }
 })
-export default watchlaterSlice.reducer
+export default likesSlice.reducer
