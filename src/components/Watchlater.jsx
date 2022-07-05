@@ -16,18 +16,18 @@ export const Watchlater = () =>{
   const watchLaterData = useSelector(state=>state.AllWatchLater);
 
     return(<>
-        <Flex pt={"4rem"} pl={'5rem'} mt={"2rem"} direction={"column"} w={"100%"}  minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content" >
+        <Flex pt={"4rem"} pl={'5rem'} direction={"column"} w={"100%"}  minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content" >
           
        <Flex justifyContent={"center"} w={"100%"} flexWrap={"wrap"}>
 
             {watchLaterData.watchlater==="loading"?  
             <ReactLoading type={'spin'} color="#4FD1C5" />:
-            watchLaterData.watchlater.length===0?(<Flex flexDirection={"column"}><h2>No watchlater Click here to browse more</h2><Button onClick={()=>navigate('/explore')}>Browse More</Button></Flex>):
+            watchLaterData.watchlater.length===0?(<Flex mt={'2rem'} flexDirection={"column"}><h2>No watchlater Click here to browse more</h2><Button onClick={()=>navigate('/explore')}>Browse More</Button></Flex>):
             watchLaterData.watchlater.map((item)=>{
             return(
               
                 <Box bgColor={'#ffffff'} display={"flex"} flexDirection={"column"} position={"relative"} height={"14rem"} width={"20rem"}  margin={"1rem"} boxShadow={"lg"} border={"1px"} borderColor={"gray.300"} pb={"2rem"}
-                key={item._id}
+                key={item._id} justifyContent={"start"}
                 >
                   <Link to={"/vedio/"+item._id}>
                 <img src={item.thumbnail} className="categoryImage"/>
