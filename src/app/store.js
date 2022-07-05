@@ -6,6 +6,7 @@ import filteredSlice from '../slice/filteredSlice'
 import AllHistory from '../slice/AllHistory'
 import AllWatchlater from '../slice/AllWatchlater'
 import AllLike from '../slice/AllLike'
+import AllPlaylist from '../slice/AllPlaylist'
 export const store = configureStore({
     reducer:{
         authReducer:authReducer,
@@ -14,6 +15,7 @@ export const store = configureStore({
         filteredSlice:filteredSlice,
         AllHistory:AllHistory,
         AllWatchLater:AllWatchlater,
-        AllLike:AllLike
+        AllLike:AllLike,
+        AllPlaylist : AllPlaylist
     },
 })
