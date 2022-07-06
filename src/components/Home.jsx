@@ -19,7 +19,7 @@ export default function Home() {
   const allCategories =useSelector(state=>state.AllCategoriesSlice)
   const dispatch  = useDispatch();
     useEffect (()=>{
-      dispatch(getAllCategories())
+      
     },[])
     const allData =useSelector(state=>state.AllVedioSlice)
       useEffect (()=>{

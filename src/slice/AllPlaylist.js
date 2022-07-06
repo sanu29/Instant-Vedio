@@ -36,6 +36,34 @@ export const addToPlaylist=createAsyncThunk(
 ) 
 
 
+
+
+export const addVideoToPlaylist=createAsyncThunk(
+    'playlist/add/video', 
+    async(data, thunkAPI)=>{
+        try{
+            console.log(data)
+            const response = await axios({
+                method: 'post',
+                url: `/api/user/playlists/${data.playlistid}`,
+                headers: {
+                    authorization: localStorage.getItem('token'),
+                },
+                data: {
+                    video:data.video
+                },
+            }
+
+            )
+            console.log(response)
+           return response.data;
+        }
+        catch(error){
+            return thunkAPI.rejectWithValue(error)
+        }
+    }
+) 
+
 export const getPlaylist=createAsyncThunk(
     'playlist/get', 
     async(thunkAPI)=>{
@@ -76,6 +104,15 @@ export const playlistSlice  = createSlice({
                       state.error = action.payload
                     
         },
+        [addVideoToPlaylist.pending]:(state)=>{
+},
+            [addVideoToPlaylist.fulfilled]:(state,action)=>{
+                    console.log(action.payload.playlist)
+            },
+            [addVideoToPlaylist.rejected]:(state,action)=>{
+                          state.error = action.payload
+                        
+            },
         [getPlaylist.pending]:(state)=>{
             state.playlists='loading';
         },

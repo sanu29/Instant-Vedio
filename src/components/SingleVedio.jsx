@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Input, Text, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Checkbox, Flex, Input, Radio, Text, useDisclosure } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -8,12 +8,13 @@ import { addToWatchlater, deleteWatchlater, getWatchlater } from '../slice/AllWa
 import { addToLikes, deleteLikes, getLikes } from '../slice/AllLike'
 import {Modal,ModalOverlay,ModalContent,ModalHeader,ModalFooter,ModalBody,ModalCloseButton} from '@chakra-ui/react'
 import { useRef } from 'react'
-import { addToPlaylist } from '../slice/AllPlaylist'
+import { addToPlaylist, addVideoToPlaylist, getPlaylist } from '../slice/AllPlaylist'
 
 export  const  SingleVedio = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   let params= useParams()
   const dispatch  = useDispatch();
+  const [PlaylistToUpdate,setPlaylistToUpdate] = useState('')
   const [singeVedioData, setSingleVedioData] = useState("loading")
   useEffect(()=>{
     (async()=>{
@@ -25,10 +26,23 @@ export  const  SingleVedio = () => {
     })()
   
   },[])
+  const listOfPlaylist =(item)=>{
+    return(
+  <Flex  onClick={()=>{
+      setPlaylistToUpdate(item._id)
+    }}>
+    <Radio size='md' name="list" colorScheme='teal'>
+      {item.name}
+  </Radio>
+  </Flex>
+
+  
+  )
+  }
   const playlistData = useSelector(state=>state.AllPlaylist)
   console.log(playlistData.playlists)
   const [showNewPlaylist , setShowNewPlaylist] = useState('none') 
-  const [newPlaylistName, setNewPlaylistName] = useState("New Playlist")
+  const [newPlaylistName, setNewPlaylistName] = useState("")
   const PlaylistModal = () =>{
     return (
       <>
@@ -36,23 +50,47 @@ export  const  SingleVedio = () => {
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Add to Playlist</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody >
-              {(playlistData.playlists).length>0?playlistData.playlists.map((item)=><h2 cursor={'pointer'}>{item.name}</h2>):<h2>No Playlist Created yet!</h2>}
+            <ModalCloseButton  onClick={()=>{
+                setShowNewPlaylist('none');
+                onClose()
+              }}/>
+            <ModalBody display={showNewPlaylist==='none'?'block':'none'}>
            
-              <h1 onClick={()=>setShowNewPlaylist('block')}> Create new playlist</h1>
-              <Input variant='outline' placeholder='Name' value={newPlaylistName} display={showNewPlaylist} onChange={(e)=>setNewPlaylistName(e.target.value)}/>
+              {(playlistData.playlists).length>0?(<>
+                  <Text fontSize={'12px'} marginBottom={'1rem'}>Click on the Playlist to add.</Text>
+                    <Flex flexDirection={'column'}>{playlistData.playlists.map((item)=>listOfPlaylist(item))}</Flex>
+                    </>
+                )
+               :<h2>No Playlist Created</h2>}
+           
+            
+              
             </ModalBody>
-  
+            <ModalBody display={showNewPlaylist}>
+            <Input variant='outline' placeholder='Playlist Name' value={newPlaylistName}  onChange={(e)=>setNewPlaylistName(e.target.value)}/>
+            </ModalBody>
             <ModalFooter>
-              <Button  mr={3} variant='ghost' onClick={onClose}>
+            
+              <Button  mr={3} variant='ghost' onClick={()=>{
+                setShowNewPlaylist('none');
+                onClose()
+              }}>
                 Close
               </Button>
-              <Button colorScheme='blue' onClick={()=>{
+              <Button display={showNewPlaylist==='none'?'flex':'none'}  onClick={()=>setShowNewPlaylist('block')} mr={3}> Create new playlist</Button>
+              <Button colorScheme='teal' display={showNewPlaylist==='none'?'flex':'none'} onClick={()=>{
+                console.log(PlaylistToUpdate)
+                dispatch(addVideoToPlaylist(PlaylistToUpdate,singeVedioData))
+                setShowNewPlaylist('none')
+                onClose()
+              }}>Add to Playlist</Button>
+
+            <Button colorScheme='teal'  display={showNewPlaylist} onClick={()=>{
                 
                 dispatch(addToPlaylist({name:newPlaylistName,videos:[singeVedioData]}))
+                setShowNewPlaylist('none')
                 onClose()
-              }}>Add </Button>
+              }}>Add New Playlist</Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
