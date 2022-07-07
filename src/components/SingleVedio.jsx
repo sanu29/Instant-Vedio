@@ -43,6 +43,7 @@ export  const  SingleVedio = () => {
   console.log(playlistData.playlists)
   const [showNewPlaylist , setShowNewPlaylist] = useState('none') 
   const [newPlaylistName, setNewPlaylistName] = useState("")
+  const [playlistError, setPlaylistError] = useState('')
   const PlaylistModal = () =>{
     return (
       <>
@@ -55,7 +56,7 @@ export  const  SingleVedio = () => {
                 onClose()
               }}/>
             <ModalBody display={showNewPlaylist==='none'?'block':'none'}>
-           
+              <Text color={'red.300'}>{playlistError}</Text>
               {(playlistData.playlists).length>0?(<>
                   <Text fontSize={'12px'} marginBottom={'1rem'}>Click on the Playlist to add.</Text>
                     <Flex flexDirection={'column'}>{playlistData.playlists.map((item)=>listOfPlaylist(item))}</Flex>
@@ -79,15 +80,20 @@ export  const  SingleVedio = () => {
               </Button>
               <Button display={showNewPlaylist==='none'?'flex':'none'}  onClick={()=>setShowNewPlaylist('block')} mr={3}> Create new playlist</Button>
               <Button colorScheme='teal' display={showNewPlaylist==='none'?'flex':'none'} onClick={()=>{
-                console.log(PlaylistToUpdate)
-                dispatch(addVideoToPlaylist(PlaylistToUpdate,singeVedioData))
-                setShowNewPlaylist('none')
-                onClose()
+                console.log( PlaylistToUpdate)
+                dispatch(addVideoToPlaylist({playlistid: PlaylistToUpdate, video: singeVedioData}))
+                .unwrap()
+                .then((data)=>{
+                  setShowNewPlaylist('none')
+                  onClose()
+                  })
+                .catch((error)=>setPlaylistError(error.response))
+
               }}>Add to Playlist</Button>
 
             <Button colorScheme='teal'  display={showNewPlaylist} onClick={()=>{
                 
-                dispatch(addToPlaylist({name:newPlaylistName,videos:[singeVedioData]}))
+                dispatch(addToPlaylist({name:newPlaylistName,videos:singeVedioData}))
                 setShowNewPlaylist('none')
                 onClose()
               }}>Add New Playlist</Button>

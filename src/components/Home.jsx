@@ -24,6 +24,7 @@ export default function Home() {
     const allData =useSelector(state=>state.AllVedioSlice)
       useEffect (()=>{
           dispatch(getAllVedios())
+          dispatch(getAllCategories())
       },[])
   const sliderImageArray = [{img:slider2,link:210001224},{img:slider1,link:210001222},{img:slider3,link:210001227}]
   const [indexOfSlider, setIndexSlider] = useState(0) 

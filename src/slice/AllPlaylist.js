@@ -86,6 +86,29 @@ export const getPlaylist=createAsyncThunk(
 ) 
 
 
+
+export const deletePlaylist=createAsyncThunk(
+    'playlist/delete', 
+    async(playlistid, thunkAPI)=>{
+        try{
+            const response = await axios({
+                method: 'delete',
+                url: `/api/user/playlists/${playlistid}`,
+                headers: {
+                    authorization: localStorage.getItem('token'),
+                }
+            }
+
+            )
+            console.log(response)
+           return response.data;
+        }
+        catch(error){
+            return thunkAPI.rejectWithValue(error)
+        }
+    }
+) 
+
 export const playlistSlice  = createSlice({
     name:"playlistSlice",
     initialState,
@@ -105,12 +128,13 @@ export const playlistSlice  = createSlice({
                     
         },
         [addVideoToPlaylist.pending]:(state)=>{
-},
+        },
             [addVideoToPlaylist.fulfilled]:(state,action)=>{
                     console.log(action.payload.playlist)
             },
             [addVideoToPlaylist.rejected]:(state,action)=>{
-                          state.error = action.payload
+                          state.error = action.payload.response.data.errors[0]
+                          console.log(state.error)
                         
             },
         [getPlaylist.pending]:(state)=>{
@@ -124,7 +148,19 @@ export const playlistSlice  = createSlice({
         },
         [getPlaylist.rejected]:(state,action)=>{
                        state.error = action.payload
-        }
+        },
+        [deletePlaylist.pending]:(state)=>{
+         
+            console.log(state.playlists)},
+        [deletePlaylist.fulfilled]:(state,action)=>{
+                    
+                    state.playlists=action.payload.playlists
+                    console.log(state.playlists)
+            },
+        [deletePlaylist.rejected]:(state,action)=>{
+                          state.error = action.payload
+                        
+            },
     }
 })
 export default playlistSlice.reducer
