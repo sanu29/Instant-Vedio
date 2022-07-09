@@ -26,6 +26,7 @@ const PlaylistModal = () =>{
           <ModalContent>
             <ModalHeader>Create new Playlist</ModalHeader>
             <ModalCloseButton  onClick={()=>{
+                setNewPlaylistName("")
                 onClose()
               }}/>
             <ModalBody >
@@ -34,6 +35,7 @@ const PlaylistModal = () =>{
             <ModalFooter>
             
               <Button  mr={3} variant='ghost' onClick={()=>{
+                setNewPlaylistName("")
                 onClose()
               }}>
                 Close
@@ -41,6 +43,7 @@ const PlaylistModal = () =>{
             <Button colorScheme='teal' onClick={()=>{
                 
                 dispatch(addToPlaylist({name:newPlaylistName}))
+                setNewPlaylistName("")
                 onClose()
               }}>Add New Playlist</Button>
             </ModalFooter>
@@ -67,14 +70,16 @@ const PlaylistModal = () =>{
             return(
               
                 <Box bgColor={'#ffffff'} display={"flex"} flexDirection={"column"} position={"relative"} height={"4rem"} width={"15rem"}  margin={"1rem"} boxShadow={"lg"} border={"1px"} borderColor={"gray.300"}
-                key={item._id}
+                key={item._id} _hover={{boxShadow:`rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;`, cursor:'pointer'}}
                 >
                 
-                        <Flex alignItems={"center"} margin={"1rem"} justifyContent={"space-between"} >
-                                <Text  fontWeight={"semibold"} pb={0}>{item.name}</Text>
+                        <Flex alignItems={"center"} margin={"1rem"}  justifyContent={"space-between"} >
+                        <Link to={"/playlist/"+item._id}>
+                                <Text  fontWeight={"semibold"} pb={0} w={"100%"} >{item.name}</Text>
+                          </Link>
                                 <Box marginLeft={'5px'} cursor={"pointer"} display={'flex'} justifyContent={"center"} alignItems={'center'}><span className="material-icons  " onClick={()=>dispatch(deletePlaylist(item._id))} title={"Delete Playlist"}>delete</span></Box>
                         </Flex>
-              
+                        
              
                 </Box>
             )

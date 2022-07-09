@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 let initialState={
     playlists:[],
     error:'',
+    singlePlaylist:'loading',
     loading:true
 }
 
@@ -86,6 +87,48 @@ export const getPlaylist=createAsyncThunk(
 ) 
 
 
+export const getSinglePlaylist=createAsyncThunk(
+    'playlist/single/get', 
+    async(playlistId,thunkAPI)=>{
+        try{
+            const response = await axios({
+                method: 'get',
+                url: `/api/user/playlists/:${playlistId}`,
+                headers: {
+                    authorization: localStorage.getItem('token'),
+                }
+            }
+
+            )
+            return response.data;
+        }
+        catch(error){
+            return thunkAPI.rejectWithValue(error.response.data)
+        }
+    }
+) 
+export const deleteVideoFromPlaylist=createAsyncThunk(
+    'playlist/delete/video', 
+    async(data,thunkAPI)=>{
+        try{
+            console.log(data.videoId,data.playlistId)
+            const response = await axios({
+                method: 'delete',
+                url: `/api/user/playlists/${data.playlistId}/${data.videoId}`,
+                headers: {
+                    authorization: localStorage.getItem('token'),
+                }
+            }
+
+            )
+            return response.data;
+        }
+        catch(error){
+            return thunkAPI.rejectWithValue(error.response.data)
+        }
+    }
+) 
+
 
 export const deletePlaylist=createAsyncThunk(
     'playlist/delete', 
@@ -161,6 +204,30 @@ export const playlistSlice  = createSlice({
                           state.error = action.payload
                         
             },
+            [getSinglePlaylist.pending]:(state)=>{
+         
+                console.log(state.playlists)},
+            [getSinglePlaylist.fulfilled]:(state,action)=>{
+                        console.log(action.payload)
+                        state.singlePlaylist=action.payload.playlist
+                        console.log(state.singlePlaylist)
+                },
+            [getSinglePlaylist.rejected]:(state,action)=>{
+                              state.error = action.payload
+                            
+                },
+                [deleteVideoFromPlaylist.pending]:(state)=>{
+         
+                    console.log(state.playlists)},
+                [deleteVideoFromPlaylist.fulfilled]:(state,action)=>{
+                            
+                            state.singlePlaylist=action.payload.playlist
+                            console.log(state.singlePlaylist)
+                    },
+                [deleteVideoFromPlaylist.rejected]:(state,action)=>{
+                                  state.error = action.payload
+                                
+                    }
     }
 })
 export default playlistSlice.reducer
