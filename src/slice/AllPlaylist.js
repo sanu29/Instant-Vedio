@@ -93,7 +93,7 @@ export const getSinglePlaylist=createAsyncThunk(
         try{
             const response = await axios({
                 method: 'get',
-                url: `/api/user/playlists/:${playlistId}`,
+                url: `/api/user/playlists/${playlistId}`,
                 headers: {
                     authorization: localStorage.getItem('token'),
                 }
@@ -206,11 +206,11 @@ export const playlistSlice  = createSlice({
             },
             [getSinglePlaylist.pending]:(state)=>{
          
-                console.log(state.playlists)},
+                },
             [getSinglePlaylist.fulfilled]:(state,action)=>{
-                        console.log(action.payload)
+              
                         state.singlePlaylist=action.payload.playlist
-                        console.log(state.singlePlaylist)
+                        
                 },
             [getSinglePlaylist.rejected]:(state,action)=>{
                               state.error = action.payload
