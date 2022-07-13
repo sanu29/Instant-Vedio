@@ -20,8 +20,8 @@
 
 .singleVedio{
 
-    width: 50rem;
-    height: 25rem;
+    width: 80vw;
+    height:70vh;
 
 }
 .main{
@@ -34,6 +34,10 @@
     flex-direction: column;
      min-width:"fit-content" 
 }
+.mainPage{
+  padding-top: 4rem;
+  padding-left: 5rem
+}
 @media only screen and (max-width: 620px) {
   .singleVedio{
 
@@ -41,9 +45,9 @@
     height: 25rem;
 
 }
-.main{
-  
-padding: 1rem;
+.mainPage{
+  padding: 0rem;
+
 }
 }
 @media only screen and (max-width: 920px) {
@@ -54,6 +58,9 @@ padding: 1rem;
     padding: 1rem;
 
 }
+.actionBtnSinglePage{
+  flex-direction: column;
+}
 .main{
   
 }
@@ -63,7 +70,9 @@ padding: 1rem;
   background-color: #1D4044;
   color: #ffff;
 }
-
+.actionBtnSinglePage{
+  flex-direction: row;
+}
 .categories:hover{
     height: 100%;
     width: 100%;

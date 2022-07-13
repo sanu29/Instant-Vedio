@@ -18,7 +18,7 @@ export const Likes = () =>{
   const LikesData = useSelector(state=>state.AllLike)
     console.log(LikesData)
     return(<>
-        <Flex pt={"4rem"} pl={'5rem'} direction={"column"} w={"100%"}  minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content" >
+        <Flex    className={"mainPage"} direction={"column"} w={"100%"}  minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content" >
           
       
 

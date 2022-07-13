@@ -16,7 +16,7 @@ export const Watchlater = () =>{
   const watchLaterData = useSelector(state=>state.AllWatchLater);
 
     return(<>
-        <Flex pt={"4rem"} pl={'5rem'} direction={"column"} w={"100%"}  minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content" >
+        <Flex    className={"mainPage"} direction={"column"} w={"100%"}  minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content" >
           
        <Flex justifyContent={"center"} w={"100%"} flexWrap={"wrap"}>
 

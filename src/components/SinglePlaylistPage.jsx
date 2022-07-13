@@ -24,7 +24,7 @@ export const SinglePlaylist = () =>{
      const single = (playlistData.playlists.filter((item)=>item._id===params.playlistId)[0])
      console.log(single)
      return(<>
-        <Flex pt={"4rem"} pl={'5rem'} direction={"column"} w={"100%"}  minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content" >
+        <Flex    className={"mainPage"} direction={"column"} w={"100%"}  minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content" >
           
        <Flex justifyContent={"start"} w={"100%"} flexWrap={"wrap"}>
         <Text width={"100%"} textAlign={"center"} fontSize={'1.2rem'} fontWeight={'Bolder'} color={'teal.900'}>{single.name}</Text>

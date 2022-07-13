@@ -14,7 +14,7 @@ const dispatch  = useDispatch();
 useEffect (()=>{
     dispatch(getAllVedios())
 },[])
-
+const authState = useSelector(state=>state.authReducer)
 const allCategories =useSelector(state=>state.AllCategoriesSlice)
   useEffect (()=>{
     dispatch(getAllCategories())
@@ -26,8 +26,8 @@ const allCategories =useSelector(state=>state.AllCategoriesSlice)
 
 
     return(<>
-     <Flex pt={"4rem"} pl={'5rem'} direction={"column"} w={"100%"}  minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content" >
-        
+     <Flex    className={"mainPage"} direction={"column"} w={"100%"}  minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content" flexWrap={'wrap'} >
+        <Flex justifyContent={'center'}  alignItems={"center"} width={"100%"} flexWrap={'wrap'}>
       <Box margin={'1rem'} display={"flex"} justifyContent={"center"} alignItems={"center"} >
             <Box margin={'1rem'} border={'1px'}  fontWeight={"bolder"} padding={'0.3rem'} borderRadius={'15px'} minWidth={'5rem'} textAlign="center" cursor={'pointer'} onClick={()=>dispatch(All())} backgroundColor={filteredSlice==='All'?'teal.900':""} color={filteredSlice==='All'?'#ffff':"teal.900"}>All
              </Box>
@@ -42,7 +42,7 @@ const allCategories =useSelector(state=>state.AllCategoriesSlice)
              <Box margin={'1rem'} border={'1px'}  fontWeight={"bolder"} padding={'0.3rem'} borderRadius={'15px'} minWidth={'5rem'} textAlign="center" cursor={'pointer'} onClick={()=>dispatch(Kids())} backgroundColor={filteredSlice==='Kids'?'teal.900':""} color={filteredSlice==='Kids'?'#ffff':"teal.900"}>Kids
              </Box>
           </Box>
-        
+          </Flex>
      <Flex justifyContent={"center"} w={"100%"} flexWrap={"wrap"}>
 
           {(allData.vedioList)==="loading"?  <ReactLoading type={'spin'} color="#4FD1C5" />:(allData.vedioList).filter(item=>filteredSlice==="All"?item:item.categoryName===filteredSlice?item:"").map((item)=>{
@@ -59,7 +59,7 @@ const allCategories =useSelector(state=>state.AllCategoriesSlice)
                          </Flex>
                           <Link to={"/vedio/"+item._id}>
                           <Button colorScheme='teal' bgcolor={"teal.900"} w="100%" borderRadius={"none"} position={"absolute"} bottom={"0px"} variant='solid' alignSelf={"flex-end"} justifySelf={"end"} 
-                          onClick={()=>dispatch( addToHistory(item))}
+                          onClick={()=>authState.isLogin===true?dispatch( addToHistory(item)):""}
                           
                           >Watch Now</Button>
                           </Link>

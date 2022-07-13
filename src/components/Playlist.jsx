@@ -58,7 +58,7 @@ const PlaylistModal = () =>{
     
     console.log(Playlist)
     return(<>
-        <Flex pt={"4rem"} pl={'5rem'} direction={"column"} w={"100%"}  minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content" >
+        <Flex    className={"mainPage"} direction={"column"} w={"100%"}  minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content" >
         <Button onClick={onOpen} borderRadius={"none"}>Create new Playlist</Button>
             {PlaylistModal()}
            <Flex justifyContent={"center"} w={"100%"} flexWrap={"wrap"} flexDirection={""}>
@@ -70,11 +70,10 @@ const PlaylistModal = () =>{
             return(
               
                 <Box bgColor={'#ffffff'} display={"flex"} flexDirection={"column"} position={"relative"} height={"4rem"} width={"15rem"}  margin={"1rem"} boxShadow={"lg"} border={"1px"} borderColor={"gray.300"}
-                key={item._id} _hover={{boxShadow:`rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;`, cursor:'pointer'}}
+                key={item._id} _hover={{boxShadow:`rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;`, cursor:'pointer'}} flexWrap={"wrap"}
                 >
-                {console.log("/playlist/"+item._id)} 
                         <Flex alignItems={"center"} margin={"1rem"}  justifyContent={"space-between"} >
-                        <Link to={"/playlist/"+item._id} onClick={()=>console.log("Yes it me "+item._id)}>
+                        <Link to={"/playlist/"+item._id} >
                                 <Text  fontWeight={"semibold"} pb={0} >{item.name}</Text>
                           </Link>
                                 <Box marginLeft={'5px'} cursor={"pointer"} display={'flex'} justifyContent={"center"} alignItems={'center'}><span className="material-icons  " onClick={()=>dispatch(deletePlaylist(item._id))} title={"Delete Playlist"}>delete</span></Box>
