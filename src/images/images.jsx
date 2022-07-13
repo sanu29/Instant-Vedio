@@ -6,5 +6,5 @@ import category2 from "./category2.jpg"
 import category3 from "./category3.PNG"
 import category4 from "./category4.PNG"
 import category5 from "./category5.jpg"
-import category6 from "./category6.png"
+import category6 from "./category6.PNG"
 export {slider1,slider2,slider3,category1,category2,category3,category4,category5,category6}
