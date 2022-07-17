@@ -19,11 +19,12 @@ export default function Home() {
   const allCategories =useSelector(state=>state.AllCategoriesSlice)
   const dispatch  = useDispatch();
     useEffect (()=>{
-      dispatch(getAllCategories())
+      
     },[])
     const allData =useSelector(state=>state.AllVedioSlice)
       useEffect (()=>{
           dispatch(getAllVedios())
+          dispatch(getAllCategories())
       },[])
   const sliderImageArray = [{img:slider2,link:210001224},{img:slider1,link:210001222},{img:slider3,link:210001227}]
   const [indexOfSlider, setIndexSlider] = useState(0) 
@@ -36,7 +37,7 @@ export default function Home() {
 
   return (
 
-    <Flex pt={"4rem"} pl={'5rem'} direction={"column"} w={"100%"} justifyContent={"center"} alignItems={"center"} minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content" >
+    <Flex    className={"mainPage"} direction={"column"} w={"100%"} justifyContent={"center"} alignItems={"center"} minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content" >
      
       <Box display={"flex"} margin={"0rem 2rem"} justifyContent={"center"} position={"relative"} minWidth={"100%"} maxWidth={"70%"} height={"25rem"} bgColor={"black"}>
       <Box className="material-icons" position={"absolute"} top={"7rem"} left={"0"} color={"white"} cursor={"pointer"}

@@ -15,7 +15,7 @@ export const History = () =>{
     const history = useSelector(state=>state.AllHistory).history;
     console.log(history)
     return(<>
-        <Flex pt={"4rem"} pl={'5rem'} direction={"column"} w={"100%"}  minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content" >
+        <Flex    className={"mainPage"} direction={"column"} w={"100%"}  minHeight={'100vh'} bgColor={"gray.100"} minWidth="fit-content" >
             <Text display={"flex"} margin={'1rem'} marginRight={"3rem"} cursor={"pointer"} justifyContent={"end"} fontWeight={'bold'}
             onClick={()=>dispatch(deleteHistoryAll())}
             >Clear All History</Text>

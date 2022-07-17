@@ -16,6 +16,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { PrivateRoutes } from "./routes/PrivateRoutes";
 import { RestrictedRoutes } from "./routes/RestrictedRoutes";
 import { Singlepage } from "./pages/Singlepage";
+import Likespage from "./pages/Likespage";
+import { SinglePlaylist } from "./components/SinglePlaylistPage";
+import { SinglePlaylistPage } from "./pages/SinglePlaylist";
 function App() {
   return (
     < >
@@ -28,6 +31,8 @@ function App() {
             <Route path={"/playlist"} element={<Playlistpage/>}/>
             <Route path={"/profile"} element={<Profilepage/>}/>
             <Route path={"/history"} element={<Historypage/>}/>
+            <Route path={"/likes"} element={<Likespage/>}/>
+            <Route path="/playlist/:playlistId" element={<SinglePlaylistPage/>}/>
         </Route>
        <Route path="/mock" element={<MockmanEs/>}/>
        <Route element={<RestrictedRoutes/>}>

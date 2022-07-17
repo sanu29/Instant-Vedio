@@ -4,7 +4,7 @@ import axios from "axios"
 
 
 let initialState={
-   user:localStorage.getItem("user")||"none",
+   user:JSON.parse(localStorage.getItem("user"))||"none",
    encodedToken:localStorage.getItem("token") ||"none",
    error:"none",
    isLogin:localStorage.getItem("user")?true:false

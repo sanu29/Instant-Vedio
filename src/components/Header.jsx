@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Logout } from '../slice/authSlice'
+import { All } from '../slice/filteredSlice'
 export default function Header() {
 
 const [isLargerThan620] = useMediaQuery('(min-width: 620px)')
@@ -26,6 +27,7 @@ return(
      <Button bgColor='teal.900' color={'white'} border={'0.5px'}
        _hover={{color:'teal.900',bgColor:"teal.300"}}>Login</Button>
      </Link>)
+
 
 }
 //console.log(authState)
@@ -61,7 +63,7 @@ return(
 
     <Link to={"/explore"}> <Button bgColor={"teal.300"} border={"none"} shadow={"none"} height={"5rem"} width={"100%"}
       textAlign={'center'} _focus={{border:'none',shadow:'none'}} title="Explore">
-    <span className="material-icons md-48 ">explore</span>
+    <span className="material-icons md-48 " onClick={()=>dispatch(All())}>explore</span>
     </Button>
     </Link>
 
@@ -80,6 +82,12 @@ return(
     <Link to={"/watchlater"}> <Button bgColor={"teal.300"} border={"none"} shadow={"none"} height={"5rem"}
       width={"100%"} textAlign={'center'} _focus={{border:'none',shadow:'none'}} title="Watch Later">
     <span className="material-icons md-48 ">watch_later</span>
+    </Button>
+    </Link>
+
+    <Link to={"/likes"}> <Button bgColor={"teal.300"} border={"none"} shadow={"none"} height={"5rem"}
+      width={"100%"} textAlign={'center'} _focus={{border:'none',shadow:'none'}} title="Watch Later">
+    <span className="material-icons md-48 ">thumb_up</span>
     </Button>
     </Link>
   </Flex>
@@ -122,6 +130,7 @@ else{
         <Link to={'/profile'}><Text borderBottom={'1px'} p={"4px 8px"}
         _hover={{bgColor:'teal.300'}}
         >Profile</Text></Link >
+        
      </Box>
       <Link to={"/login"}>
       <Button bgColor='teal.900' color={'white'} border={'0.5px'}
