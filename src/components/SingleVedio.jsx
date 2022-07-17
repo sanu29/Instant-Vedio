@@ -93,7 +93,7 @@ export  const  SingleVedio = () => {
                   onClose()
                   })
                 .catch((error)=>{setPlaylistError(error.response)
-                onClose()
+              
                 })
 
               }}>Add to Playlist</Button>
