@@ -92,7 +92,7 @@ export  const  SingleVedio = () => {
                   setShowNewPlaylist('none')
                   onClose()
                   })
-                .catch((error)=>{setPlaylistError(error.response)
+                .catch((error)=>{setPlaylistError(error.response.errors[0])
               
                 })
 
